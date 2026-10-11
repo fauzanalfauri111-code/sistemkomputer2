@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173b45">
+  <meta name="description" content="Pembelajaran mandiri Informatika kelas X tentang kolaborasi dalam sistem komputer, dengan materi dan misi bertahap selama 90 menit.">
+  <title>Misi 4 — Kolaborasi Sistem Komputer</title>
+  <style>
+    :root {
+      --ink: #17353c;
+      --muted: #60767a;
+      --paper: #f5f8f5;
+      --card: #ffffff;
+      --line: #dce7e2;
+      --teal: #1f6b69;
+      --teal-dark: #174f52;
+      --mint: #dff3e9;
+      --lime: #d7ef84;
+      --amber: #f3c978;
+      --blue-pale: #edf5f7;
+      --shadow: 0 12px 35px rgba(27, 63, 62, .08);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+    button, a { font: inherit; }
+    button { cursor: pointer; }
+    a { color: var(--teal); }
+    .topline { height: 7px; background: linear-gradient(90deg, var(--lime), #54b7a3 55%, var(--teal)); }
+    .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    header { padding: 24px 0 18px; }
+    .brand-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .brand { display: flex; gap: 10px; align-items: center; font-size: .78rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+    .brand-mark { width: 38px; height: 38px; display: grid; place-items: center; background: var(--teal); color: white; border-radius: 13px; font-size: 1.1rem; letter-spacing: 0; }
+    .pill { padding: 7px 12px; background: #e8f1ed; border: 1px solid var(--line); border-radius: 999px; color: var(--teal-dark); font-size: .78rem; font-weight: 750; white-space: nowrap; }
+    .hero { margin-top: 20px; padding: clamp(22px, 4vw, 42px); border-radius: 28px; color: #fff; background: radial-gradient(circle at 90% 5%, rgba(215,239,132,.3), transparent 25%), linear-gradient(130deg, #173b45, #1f6b69 76%, #338779); position: relative; overflow: hidden; box-shadow: var(--shadow); }
+    .hero:after { content: ""; position: absolute; width: 230px; height: 230px; border: 1px solid rgba(255,255,255,.14); border-radius: 50%; right: -50px; bottom: -145px; box-shadow: 0 0 0 25px rgba(255,255,255,.035), 0 0 0 55px rgba(255,255,255,.025); pointer-events: none; }
+    .eyebrow { color: var(--lime); font-size: .78rem; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { max-width: 800px; margin: 8px 0 12px; font-size: clamp(2rem, 5vw, 3.55rem); line-height: 1.08; letter-spacing: -.04em; }
+    .hero p { max-width: 720px; margin: 0; color: rgba(255,255,255,.84); font-size: 1.04rem; }
+    .hero-bottom { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+    .hero-chip { padding: 7px 11px; border: 1px solid rgba(255,255,255,.22); border-radius: 10px; background: rgba(255,255,255,.09); font-size: .86rem; }
+    .dashboard { margin: 18px 0 24px; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 12px; }
+    .stat { padding: 16px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 17px; box-shadow: 0 4px 14px rgba(24, 59, 65, .025); }
+    .stat-label { color: var(--muted); font-size: .76rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+    .stat-value { margin-top: 2px; font-size: 1.38rem; font-weight: 900; letter-spacing: -.025em; }
+    .progress-track { width: 100%; height: 7px; margin-top: 9px; background: #e8efeb; border-radius: 999px; overflow: hidden; }
+    .progress-fill { width: 0; height: 100%; background: linear-gradient(90deg, #78ba9b, var(--teal)); transition: width .25s ease; }
+    .layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 22px; align-items: start; padding-bottom: 42px; }
+    aside { position: sticky; top: 14px; }
+    .nav-card, .content-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .nav-card { padding: 16px; }
+    .nav-heading { margin: 2px 5px 12px; font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 850; }
+    .nav-list { display: grid; gap: 5px; }
+    .nav-item { display: grid; grid-template-columns: 34px minmax(0, 1fr) 18px; align-items: center; width: 100%; padding: 9px; gap: 8px; text-align: left; color: var(--ink); border: 1px solid transparent; border-radius: 13px; background: transparent; transition: .15s ease; }
+    .nav-item:hover { background: #f3f8f5; }
+    .nav-item.active { background: #eaf5ef; border-color: #cfe5d9; }
+    .nav-num { height: 32px; width: 32px; display: grid; place-items: center; border-radius: 10px; background: #edf2ef; color: var(--muted); font-size: .78rem; font-weight: 900; }
+    .nav-item.active .nav-num { color: white; background: var(--teal); }
+    .nav-item.done .nav-num { color: #14513f; background: var(--lime); }
+    .nav-label { font-size: .86rem; font-weight: 750; line-height: 1.3; }
+    .nav-sub { display: block; color: var(--muted); font-size: .71rem; font-weight: 550; margin-top: 3px; }
+    .nav-check { font-size: .9rem; color: var(--teal); }
+    .tip-card { padding: 15px; background: #f0f7f3; border: 1px solid #d9e9df; border-radius: 16px; margin-top: 12px; font-size: .84rem; color: #416361; }
+    .tip-card strong { display: block; color: var(--teal-dark); margin-bottom: 3px; }
+    .content-card { overflow: hidden; min-height: 520px; }
+    .step { display: none; animation: reveal .22s ease; }
+    .step.active { display: block; }
+    @keyframes reveal { from { opacity: .4; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    .step-top { padding: 25px clamp(20px, 4vw, 38px) 20px; background: linear-gradient(120deg, #f2f8f4, #f6faf9); border-bottom: 1px solid var(--line); }
+    .step-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; color: var(--teal); font-size: .75rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .step-meta .dot { width: 5px; height: 5px; border-radius: 50%; background: #9bbab0; }
+    h2 { margin: 8px 0 8px; font-size: clamp(1.5rem, 3vw, 2.05rem); line-height: 1.16; letter-spacing: -.035em; }
+    .step-intro { margin: 0; max-width: 720px; color: var(--muted); }
+    .step-body { padding: 25px clamp(20px, 4vw, 38px) 30px; }
+    h3 { margin: 22px 0 8px; font-size: 1.08rem; line-height: 1.35; }
+    h3:first-child { margin-top: 0; }
+    p { margin: 9px 0; }
+    .callout { padding: 15px 17px; border-left: 4px solid var(--teal); border-radius: 0 13px 13px 0; background: #eff7f3; margin: 16px 0; }
+    .callout.amber { border-left-color: #d49a35; background: #fff7e8; }
+    .callout strong { color: var(--teal-dark); }
+    .callout.amber strong { color: #895d12; }
+    .concept-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 16px 0; }
+    .concept { padding: 15px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+    .concept .emoji { font-size: 1.45rem; }
+    .concept h3 { margin: 5px 0; font-size: 1rem; }
+    .concept p { margin: 0; font-size: .86rem; color: var(--muted); }
+    .pair-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+    .pair { padding: 16px; background: #fbfdfb; border: 1px solid var(--line); border-radius: 16px; }
+    .pair h3 { margin: 0 0 7px; font-size: .99rem; }
+    .pair p { color: var(--muted); font-size: .9rem; margin: 0; }
+    .flow { display: grid; grid-template-columns: 1fr 26px 1fr 26px 1fr; gap: 8px; align-items: center; margin: 17px 0; }
+    .flow-box { padding: 15px 8px; text-align: center; border: 1px solid #d8e7df; border-radius: 14px; background: #f2f9f5; }
+    .flow-box strong { display: block; font-size: .92rem; }
+    .flow-box small { color: var(--muted); font-size: .77rem; }
+    .flow-arrow { text-align: center; color: var(--teal); font-size: 1.25rem; font-weight: 900; }
+    ol, ul { padding-left: 1.3rem; }
+    li { padding-left: 3px; margin: 7px 0; }
+    .mission-banner { display: flex; align-items: center; gap: 13px; border: 1px solid #e7d4a7; background: #fff8e9; padding: 14px 16px; border-radius: 15px; margin-bottom: 18px; }
+    .mission-icon { width: 42px; height: 42px; flex: 0 0 42px; display: grid; place-items: center; border-radius: 13px; background: var(--amber); font-size: 1.25rem; }
+    .mission-banner strong { display: block; color: #755116; }
+    .mission-banner span { color: #8b7651; font-size: .84rem; }
+    .question-list { counter-reset: quest; display: grid; gap: 10px; margin: 16px 0; }
+    .question { counter-increment: quest; position: relative; padding: 14px 15px 14px 52px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+    .question:before { content: counter(quest); position: absolute; left: 14px; top: 13px; width: 26px; height: 26px; display: grid; place-items: center; background: #e7f3ec; border-radius: 9px; color: var(--teal); font-size: .82rem; font-weight: 900; }
+    .notebook-note { padding: 12px 14px; margin-top: 18px; background: var(--blue-pale); border-radius: 12px; color: #43636d; font-size: .88rem; }
+    .mini-table-wrap { width: 100%; overflow-x: auto; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; min-width: 490px; font-size: .87rem; }
+    th, td { padding: 11px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: #eef6f1; color: var(--teal-dark); }
+    td { color: #53686b; }
+    .reflect-list { display: grid; gap: 9px; margin: 16px 0; }
+    .reflect-item { display: flex; gap: 10px; align-items: flex-start; padding: 11px 13px; border: 1px solid var(--line); border-radius: 12px; }
+    .reflect-item input { accent-color: var(--teal); width: 18px; height: 18px; margin-top: 4px; }
+    .google-box { display: flex; align-items: center; gap: 15px; padding: 18px; border: 1px solid #cee4d8; background: #f1f9f4; border-radius: 17px; margin: 16px 0; }
+    .google-symbol { width: 49px; height: 49px; flex: 0 0 49px; display: grid; place-items: center; background: #fff; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.05); font-size: 1.5rem; }
+    .google-box strong { display: block; }
+    .google-box p { margin: 3px 0 0; font-size: .88rem; color: var(--muted); }
+    .step-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 18px clamp(20px, 4vw, 38px); border-top: 1px solid var(--line); background: #fcfdfc; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 12px; background: white; color: var(--ink); font-weight: 800; text-decoration: none; transition: transform .15s, background .15s; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary { border-color: var(--teal); background: var(--teal); color: #fff; }
+    .btn.primary:hover { background: var(--teal-dark); }
+    .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+    .btn-link { display: inline-flex; align-items: center; text-decoration: none; }
+    .footer-left { display: flex; gap: 8px; flex-wrap: wrap; }
+    .completion-status { color: var(--muted); font-size: .82rem; font-weight: 700; }
+    .end-note { text-align: center; color: var(--muted); font-size: .82rem; padding: 0 0 30px; }
+    .toast { position: fixed; left: 50%; bottom: 20px; transform: translate(-50%, 18px); background: #173b45; color: white; padding: 11px 16px; border-radius: 12px; box-shadow: var(--shadow); font-size: .9rem; opacity: 0; pointer-events: none; transition: .2s; z-index: 99; max-width: calc(100% - 24px); }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .timer-controls { display: flex; gap: 7px; margin-top: 8px; }
+    .timer-controls button { border: 1px solid var(--line); background: #f9fbf9; color: var(--teal-dark); border-radius: 9px; padding: 5px 9px; font-size: .77rem; font-weight: 800; }
+    .small-print { font-size: .8rem; color: var(--muted); }
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 1fr; }
+      aside { position: static; }
+      .nav-card { padding: 12px; }
+      .nav-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nav-heading { margin-top: 4px; }
+      .nav-item { grid-template-columns: 30px minmax(0,1fr) 15px; padding: 7px; }
+      .nav-num { width: 29px; height: 29px; }
+      .tip-card { display: none; }
+      .content-card { min-height: unset; }
+    }
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 20px, 1180px); }
+      header { padding-top: 15px; }
+      .hero { margin-top: 14px; border-radius: 22px; }
+      .dashboard { grid-template-columns: 1fr 1fr; }
+      .stat:first-child { grid-column: 1 / -1; }
+      .concept-grid, .pair-grid { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr; gap: 6px; }
+      .flow-arrow { transform: rotate(90deg); }
+      .nav-list { grid-template-columns: 1fr; }
+      .nav-item { padding: 8px; }
+      .step-top { padding-top: 21px; }
+      .step-body { padding-top: 21px; }
+      .step-footer { align-items: stretch; flex-direction: column; }
+      .step-footer .btn { width: 100%; }
+      .footer-left { display: grid; grid-template-columns: 1fr 1fr; }
+      .completion-status { text-align: center; }
+      .google-box { align-items: flex-start; }
+    }
+    @media print {
+      body { background: #fff; }
+      .topline, aside, .dashboard, .step-footer, .timer-controls, .pill { display: none !important; }
+      .shell { width: 100%; }
+      .hero { color: var(--ink); background: white; box-shadow: none; border: 1px solid #ccc; }
+      .hero p, .eyebrow { color: var(--ink); }
+      .layout { display: block; }
+      .content-card { box-shadow: none; }
+      .step { display: block !important; page-break-after: always; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline"></div>
+  <div class="shell">
+    <header>
+      <div class="brand-row">
+        <div class="brand"><div class="brand-mark">⌘</div><span>Informatika<br>Kelas X</span></div>
+        <span class="pill">Pembelajaran mandiri · Bab 4</span>
+      </div>
+      <section class="hero">
+        <div class="eyebrow">Misi investigasi #04</div>
+        <h1>Mengungkap Rahasia Kolaborasi Sistem Komputer</h1>
+        <p>Komputer bisa terlihat lengkap, tetapi apakah semua bagiannya benar-benar bekerja sama? Pelajari materinya, pecahkan misi, dan tulis hasil investigasimu di buku tulis.</p>
+        <div class="hero-bottom">
+          <span class="hero-chip">◷ 90 menit · 2 JP</span>
+          <span class="hero-chip">✎ Jawaban di buku tulis</span>
+          <span class="hero-chip">↗ Kumpulkan lewat Google Form</span>
+        </div>
+      </section>
+      <section class="dashboard" aria-label="Ringkasan progres">
+        <div class="stat">
+          <div class="stat-label">Progres pembelajaran</div>
+          <div class="stat-value"><span id="progressCount">0</span><span style="font-size:.9rem;color:var(--muted);font-weight:700"> / 11 bagian selesai</span></div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Waktu tersisa</div>
+          <div class="stat-value" id="timerDisplay">90:00</div>
+          <div class="timer-controls"><button id="timerStart">Mulai waktu</button><button id="timerPause">Jeda</button><button id="timerReset">Ulangi</button></div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Misi utama</div>
+          <div class="stat-value">4 tantangan</div>
+          <div class="small-print">Baca · Analisis · Tulis · Kumpulkan</div>
+        </div>
+      </section>
+    </header>
+
+    <main class="layout">
+      <aside>
+        <nav class="nav-card" aria-label="Navigasi pembelajaran">
+          <div class="nav-heading">Jelajah misi</div>
+          <div class="nav-list" id="stepNav">
+            <button class="nav-item active" data-go="0"><span class="nav-num">01</span><span class="nav-label">Mulai di sini<span class="nav-sub">Petunjuk · 5 menit</span></span><span class="nav-check"></span></button>
+            <button class="nav-item" data-go="1"><span class="nav-num">02</span><span class="nav-label">Materi 1<span class="nav-sub">Unsur sistem · 8 menit</span></span><span class="nav-check"></span></button>
+            <button class="nav-item" data-go="2"><span class="nav-num">03</span><span class="nav-label">Misi 1<span class="nav-sub">Keyboard misterius · 9 menit</span></span><span class="nav-check"></span></button>
+            <button class="nav-item" data-go="3"><span class="nav-num">04</span><span class="nav-label">Materi 2<span class="nav-sub">Bentuk kolaborasi · 10 menit</span></span><span class="nav-check"></span></button>
+            <button class="nav-item" data-go="4"><span class="nav-num">05</span><span class="nav-label">Misi 2<span class="nav-sub">Peta kolaborasi · 12 menit</span></span><span class="nav-check"></span></button>
+            <button class="nav-item" data-go="5"><span class="nav-num">06</span><span class="nav-label">Materi 3<span class="nav-sub">Sistem operasi · 8 menit</span></span><span class="nav-check"></span></button>
+            <button class="nav-item" data-go="6"><span class="nav-num">07</span><span class="nav-label">Misi 3<span class="nav-sub">Komputer melambat · 10 menit</span></span><span class="nav-check"></span></button>
+            <button class="nav-item" data-go="7"><span class="nav-num">08</span><span class="nav-label">Materi 4<span class="nav-sub">Alur kerja komputer · 8 menit</span></span><span class="nav-check"></span></button>
+            <button class="nav-item" data-go="8"><span class="nav-num">09</span><span class="nav-label">Misi 4<span class="nav-sub">Tugas tak tercetak · 12 menit</span></span><span class="nav-check"></span></button>
+            <button class="nav-item" data-go="9"><span class="nav-num">10</span><span class="nav-label">Refleksi<span class="nav-sub">Periksa jawaban · 4 menit</span></span><span class="nav-check"></span></button>
+            <button class="nav-item" data-go="10"><span class="nav-num">11</span><span class="nav-label">Pengumpulan<span class="nav-sub">Google Form · 4 menit</span></span><span class="nav-check"></span></button>
+          </div>
+        </nav>
+        <div class="tip-card"><strong>Ingat, detektif!</strong>Semua jawaban misi dikerjakan di buku tulis. Website ini menjadi pemandu; bukan tempat menulis jawaban akhir.</div>
+      </aside>
+
+      <section class="content-card" aria-live="polite">
+        <!-- BAGIAN 1 -->
+        <article class="step active" data-step="0" data-minutes="5">
+          <div class="step-top"><div class="step-meta">Bagian 01 <span class="dot"></span> Orientasi <span class="dot"></span> 5 menit</div><h2>Siap menjadi detektif komputer?</h2><p class="step-intro">Hari ini kamu akan mempelajari bagaimana komponen komputer saling bekerja sama dan mencari kemungkinan penyebab ketika kerja sama itu bermasalah.</p></div>
+          <div class="step-body">
+            <div class="callout"><strong>Targetmu hari ini:</strong> memahami hubungan hardware, software, brainware, sistem operasi, CPU, RAM, serta alur input–proses–output.</div>
+            <h3>Persiapkan dirimu</h3>
+            <ol><li>Siapkan buku tulis dan alat tulis.</li><li>Baca materi sesuai urutan website.</li><li>Setelah setiap materi, kerjakan misi pada buku tulis.</li><li>Jawab dengan bahasa sendiri dan beri nomor sesuai nomor misi.</li><li>Di akhir pembelajaran, kumpulkan foto pekerjaan lewat Google Form.</li></ol>
+            <div class="mission-banner"><div class="mission-icon">🔎</div><div><strong>Pertanyaan pemantik</strong><span>Komputer menyala normal, tetapi keyboard tidak merespons. Apakah komputer masih bisa digunakan secara normal? Mengapa?</span></div></div>
+            <p>Tulis dugaan awalmu dalam <strong>2–3 kalimat</strong> di buku tulis. Tidak masalah jika jawabanmu belum tepat. Setelah mempelajari materi, kamu bisa memeriksa kembali dugaan itu.</p>
+            <div class="notebook-note">✎ <strong>Catat di buku:</strong> “Dugaan awal saya tentang komputer yang keyboard-nya tidak merespons adalah ….”</div>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status0">Tandai selesai setelah membaca petunjuk.</span><div class="footer-left"><button class="btn primary complete-next" data-complete="0">Selesai & lanjut →</button></div></div>
+        </article>
+
+        <!-- BAGIAN 2 -->
+        <article class="step" data-step="1" data-minutes="8">
+          <div class="step-top"><div class="step-meta">Bagian 02 <span class="dot"></span> Materi 1 <span class="dot"></span> 8 menit</div><h2>Mengapa komputer harus berkolaborasi?</h2><p class="step-intro">Komputer bukan sekadar kumpulan benda elektronik. Ia merupakan sistem yang komponen-komponennya saling mendukung untuk menyelesaikan tugas.</p></div>
+          <div class="step-body">
+            <p>Ada tiga unsur utama yang perlu kamu kenali terlebih dahulu:</p>
+            <div class="concept-grid">
+              <div class="concept"><div class="emoji">⌨️</div><h3>Hardware</h3><p>Perangkat keras, yaitu bagian fisik komputer yang dapat dilihat atau disentuh. Contoh: keyboard, monitor, CPU, RAM, dan printer.</p></div>
+              <div class="concept"><div class="emoji">🧩</div><h3>Software</h3><p>Perangkat lunak berupa program atau instruksi yang membantu komputer menjalankan tugas. Contoh: sistem operasi dan aplikasi pengolah kata.</p></div>
+              <div class="concept"><div class="emoji">🧑‍💻</div><h3>Brainware</h3><p>Manusia yang menggunakan, mengelola, atau mengembangkan sistem komputer, sesuai tugas dan kebutuhannya.</p></div>
+            </div>
+            <div class="callout"><strong>Contoh sehari-hari:</strong> saat mengetik tugas, keyboard menerima ketukan, aplikasi pengolah kata menampilkan dokumen, sistem operasi membantu mengelola sumber daya komputer, dan kamu menentukan isi tulisan.</div>
+            <h3>Mengapa tidak cukup hanya satu unsur?</h3>
+            <p>Hardware tanpa instruksi yang sesuai tidak dapat menyelesaikan semua tugas yang diinginkan pengguna. Software membutuhkan perangkat keras untuk dijalankan. Brainware memberikan tujuan dan perintah, serta memeriksa hasilnya. Perannya berbeda, tetapi saling berkaitan.</p>
+            <p>Kolaborasi yang baik membuat komputer bisa digunakan sesuai tujuan. Jika satu bagian bermasalah, proses tertentu dapat terganggu—namun jenis gangguan dan penyebabnya perlu diperiksa, tidak boleh langsung ditebak.</p>
+            <div class="notebook-note">📌 Ingat kata kunci: <strong>hardware = perangkat fisik, software = program/instruksi, brainware = manusia.</strong></div>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status1">Selesai membaca materi 1?</span><div class="footer-left"><button class="btn primary complete-next" data-complete="1">Buka Misi 1 →</button></div></div>
+        </article>
+
+        <!-- BAGIAN 3 -->
+        <article class="step" data-step="2" data-minutes="9">
+          <div class="step-top"><div class="step-meta">Bagian 03 <span class="dot"></span> Misi 1 <span class="dot"></span> 9 menit</div><h2>Kasus: Keyboard misterius</h2><p class="step-intro">Gunakan materi sebelumnya untuk mengidentifikasi peran komponen, bukan sekadar menebak perangkat yang rusak.</p></div>
+          <div class="step-body">
+            <div class="mission-banner"><div class="mission-icon">⌨️</div><div><strong>Situasi investigasi</strong><span>Sebuah komputer menyala normal. Monitor menampilkan halaman pengolah kata. Namun, ketika murid menekan tombol keyboard, tidak ada huruf yang muncul.</span></div></div>
+            <h3>Jawab seluruh pertanyaan di buku tulis</h3>
+            <div class="question-list"><div class="question">Tuliskan tiga unsur utama sistem komputer yang telah kamu pelajari.</div><div class="question">Unsur atau bagian mana yang mungkin mengalami masalah dalam kasus ini? Jelaskan bahwa itu masih dugaan, bukan kepastian.</div><div class="question">Jelaskan hubungan keyboard, aplikasi pengolah kata, dan pengguna.</div><div class="question">Apa yang mungkin terjadi jika salah satu unsur sistem komputer tidak menjalankan perannya?</div></div>
+            <div class="callout amber"><strong>Syarat menyelesaikan misi:</strong> jawaban harus menjelaskan hubungan antarkomponen. Jangan hanya menuliskan daftar nama perangkat.</div>
+            <div class="notebook-note">✎ Beri judul di buku tulis: <strong>Misi 1 — Keyboard Misterius.</strong> Nomori jawaban 1–4.</div>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status2">Sudah menulis jawaban misi 1?</span><div class="footer-left"><button class="btn primary complete-next" data-complete="2">Misi selesai, lanjut →</button></div></div>
+        </article>
+
+        <!-- BAGIAN 4 -->
+        <article class="step" data-step="3" data-minutes="10">
+          <div class="step-top"><div class="step-meta">Bagian 04 <span class="dot"></span> Materi 2 <span class="dot"></span> 10 menit</div><h2>Empat bentuk kolaborasi sistem komputer</h2><p class="step-intro">Kerja sama dalam komputer terjadi di antara perangkat fisik, program, pengguna, hingga komputer yang terhubung dalam jaringan.</p></div>
+          <div class="step-body">
+            <div class="pair-grid">
+              <div class="pair"><h3>01 · Hardware dengan hardware</h3><p>Contoh: keyboard terhubung ke komputer; CPU mengakses data yang diperlukan dari memori. Masing-masing perangkat menjalankan fungsi yang saling berkaitan.</p></div>
+              <div class="pair"><h3>02 · Hardware dengan software</h3><p>Contoh: sistem operasi mengelola perangkat, sedangkan aplikasi menggunakan sumber daya komputer untuk menjalankan tugas.</p></div>
+              <div class="pair"><h3>03 · Aplikasi dengan pengguna</h3><p>Contoh: murid memilih menu, mengetik teks, lalu membaca hasilnya di layar. Pengguna memberi perintah dan aplikasi membantu melaksanakan tugas.</p></div>
+              <div class="pair"><h3>04 · Komputer dengan komputer</h3><p>Contoh: komputer dalam jaringan berbagi data atau menggunakan printer jaringan sesuai pengaturan yang berlaku.</p></div>
+            </div>
+            <h3>Perhatikan dampak jika kolaborasi gagal</h3>
+            <p>Jika keyboard tidak tersambung dengan benar, input mungkin tidak diterima. Jika perangkat lunak tidak mendukung suatu perangkat, fungsi tertentu bisa tidak tersedia. Jika koneksi jaringan terganggu, komputer mungkin gagal mengakses printer jaringan. Dampaknya berbeda-beda bergantung pada letak masalah.</p>
+            <div class="callout"><strong>Petunjuk analisis:</strong> untuk setiap kasus, pikirkan tiga hal: komponen apa yang terlibat, apa peran masing-masing, dan bagian mana dari tugas yang terdampak jika kerja sama gagal.</div>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status3">Selesai membaca empat bentuk kolaborasi?</span><div class="footer-left"><button class="btn primary complete-next" data-complete="3">Buka Misi 2 →</button></div></div>
+        </article>
+
+        <!-- BAGIAN 5 -->
+        <article class="step" data-step="4" data-minutes="12">
+          <div class="step-top"><div class="step-meta">Bagian 05 <span class="dot"></span> Misi 2 <span class="dot"></span> 12 menit</div><h2>Bongkar hubungan komponen</h2><p class="step-intro">Sekarang buktikan bahwa kamu bisa menghubungkan konsep kolaborasi dengan contoh nyata.</p></div>
+          <div class="step-body">
+            <div class="mission-banner"><div class="mission-icon">🗺️</div><div><strong>Tugas investigasi</strong><span>Buat tabel empat bentuk kolaborasi pada buku tulis. Isi seluruh kolom dengan contoh dan analisis buatanmu sendiri.</span></div></div>
+            <div class="mini-table-wrap"><table><thead><tr><th>Bentuk kolaborasi</th><th>Contoh</th><th>Peran masing-masing</th><th>Dampak jika gagal</th></tr></thead><tbody><tr><td>Hardware ↔ hardware</td><td>Isi di buku</td><td>Isi di buku</td><td>Isi di buku</td></tr><tr><td>Hardware ↔ software</td><td>Isi di buku</td><td>Isi di buku</td><td>Isi di buku</td></tr><tr><td>Aplikasi ↔ pengguna</td><td>Isi di buku</td><td>Isi di buku</td><td>Isi di buku</td></tr><tr><td>Komputer ↔ komputer</td><td>Isi di buku</td><td>Isi di buku</td><td>Isi di buku</td></tr></tbody></table></div>
+            <h3>Tantangan tambahan</h3><p>Pilih satu baris pada tabelmu. Jelaskan mengapa kedua komponen tersebut tidak cukup bekerja sendiri untuk menyelesaikan tugas yang kamu pilih.</p>
+            <div class="callout amber"><strong>Syarat menyelesaikan misi:</strong> keempat baris terisi dengan contoh konkret, peran setiap bagian jelas, dan dampak kegagalan masuk akal.</div>
+            <div class="notebook-note">✎ Beri judul: <strong>Misi 2 — Peta Kolaborasi.</strong> Pastikan tabel bisa dibaca dan tidak ada kolom yang kosong.</div>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status4">Sudah menyelesaikan tabel misi 2?</span><div class="footer-left"><button class="btn primary complete-next" data-complete="4">Misi selesai, lanjut →</button></div></div>
+        </article>
+
+        <!-- BAGIAN 6 -->
+        <article class="step" data-step="5" data-minutes="8">
+          <div class="step-top"><div class="step-meta">Bagian 06 <span class="dot"></span> Materi 3 <span class="dot"></span> 8 menit</div><h2>Sistem operasi dan multitasking</h2><p class="step-intro">Sistem operasi membantu mengelola sumber daya komputer dan menyediakan lingkungan agar aplikasi dapat berjalan.</p></div>
+          <div class="step-body">
+            <h3>Apa itu sistem operasi?</h3>
+            <p>Sistem operasi adalah perangkat lunak sistem yang mengelola sumber daya komputer dan menjadi penghubung penting antara pengguna, aplikasi, serta perangkat keras. Contohnya: Windows, Linux, macOS, Android, dan iOS.</p>
+            <h3>Apa itu multitasking?</h3>
+            <p><strong>Multitasking</strong> adalah kemampuan sistem operasi untuk menjalankan atau mengelola beberapa tugas dalam waktu yang bersamaan. Misalnya, kamu membuka browser, aplikasi pengolah kata, dan pemutar musik pada laptop yang sama.</p>
+            <div class="pair-grid">
+              <div class="pair"><h3>CPU — pemrosesan</h3><p>CPU menjalankan instruksi dan melakukan pemrosesan data sesuai program yang sedang dikerjakan.</p></div>
+              <div class="pair"><h3>RAM — memori sementara</h3><p>RAM menyimpan sementara data dan instruksi yang sedang digunakan agar dapat diakses saat program berjalan. Isinya bersifat sementara.</p></div>
+            </div>
+            <div class="callout"><strong>Jika komputer melambat:</strong> banyak aplikasi aktif dapat meningkatkan kebutuhan sumber daya. Namun, komputer lambat juga bisa disebabkan oleh faktor lain. Perlu pemeriksaan sebelum menyimpulkan penyebabnya.</div>
+            <h3>Contoh langkah awal yang masuk akal</h3><ul><li>Simpan pekerjaan agar tidak hilang.</li><li>Tutup aplikasi atau tab yang tidak dibutuhkan.</li><li>Periksa apakah ada proses yang memakai banyak sumber daya.</li><li>Jika masalah berlanjut, minta bantuan petugas/guru untuk pemeriksaan lebih lanjut.</li></ul>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status5">Paham perbedaan CPU dan RAM?</span><div class="footer-left"><button class="btn primary complete-next" data-complete="5">Buka Misi 3 →</button></div></div>
+        </article>
+
+        <!-- BAGIAN 7 -->
+        <article class="step" data-step="6" data-minutes="10">
+          <div class="step-top"><div class="step-meta">Bagian 07 <span class="dot"></span> Misi 3 <span class="dot"></span> 10 menit</div><h2>Kasus: Komputer mendadak melambat</h2><p class="step-intro">Jangan langsung menyalahkan satu komponen. Gunakan pengetahuan tentang multitasking dan sumber daya sistem untuk menganalisis kasus.</p></div>
+          <div class="step-body">
+            <div class="mission-banner"><div class="mission-icon">🐢</div><div><strong>Situasi investigasi</strong><span>Seorang murid membuka banyak tab browser, aplikasi pengolah kata, dan aplikasi presentasi secara bersamaan. Setelah beberapa saat, komputer terasa lambat.</span></div></div>
+            <h3>Jawab seluruh pertanyaan di buku tulis</h3>
+            <div class="question-list"><div class="question">Apa yang dimaksud dengan multitasking?</div><div class="question">Apa peran sistem operasi dalam situasi tersebut?</div><div class="question">Jelaskan perbedaan peran CPU dan RAM saat program dijalankan.</div><div class="question">Sebutkan dua tindakan yang bisa dilakukan pengguna untuk membantu mengurangi beban komputer.</div><div class="question">Mengapa kita tidak boleh langsung menyimpulkan satu komponen pasti rusak hanya karena komputer lambat?</div></div>
+            <div class="callout amber"><strong>Syarat menyelesaikan misi:</strong> hubungkan gejala komputer lambat dengan penggunaan sumber daya dan peran beberapa komponen. Beri alasan untuk setiap jawaban.</div>
+            <div class="notebook-note">✎ Beri judul: <strong>Misi 3 — Komputer Melambat.</strong> Nomori jawaban 1–5.</div>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status6">Sudah menulis jawaban misi 3?</span><div class="footer-left"><button class="btn primary complete-next" data-complete="6">Misi selesai, lanjut →</button></div></div>
+        </article>
+
+        <!-- BAGIAN 8 -->
+        <article class="step" data-step="7" data-minutes="8">
+          <div class="step-top"><div class="step-meta">Bagian 08 <span class="dot"></span> Materi 4 <span class="dot"></span> 8 menit</div><h2>Bagaimana komputer memproses data?</h2><p class="step-intro">Komputer menerima masukan, mengolah data berdasarkan instruksi, lalu menghasilkan keluaran. Memori dan media penyimpanan mendukung proses tersebut.</p></div>
+          <div class="step-body">
+            <div class="flow" aria-label="Alur input proses output"><div class="flow-box"><strong>INPUT</strong><small>Keyboard, mouse</small></div><div class="flow-arrow">→</div><div class="flow-box"><strong>PROSES</strong><small>CPU menjalankan instruksi</small></div><div class="flow-arrow">→</div><div class="flow-box"><strong>OUTPUT</strong><small>Monitor, speaker, printer</small></div></div>
+            <p>RAM menyimpan sementara data dan instruksi yang sedang digunakan. Media penyimpanan, seperti SSD atau hard disk, menyimpan data lebih lama, termasuk saat komputer dimatikan.</p>
+            <div class="callout"><strong>Contoh:</strong> saat kamu mengetik angka di aplikasi kalkulator, angka masuk melalui keyboard, aplikasi memproses perintah dengan bantuan sistem komputer, lalu hasil perhitungan ditampilkan di layar.</div>
+            <h3>Alur ini adalah penyederhanaan</h3><p>Dalam situasi nyata, komputer bisa membaca data dari penyimpanan, mengulang pemrosesan, atau mengirimkan hasil ke perangkat lain melalui jaringan. Banyak komponen bekerja sama selama proses berlangsung.</p>
+            <h3>Ingat perbedaannya</h3><ul><li><strong>Input:</strong> data/perintah yang masuk ke sistem.</li><li><strong>Proses:</strong> instruksi dijalankan dan data diolah.</li><li><strong>Output:</strong> hasil ditampilkan atau dikeluarkan.</li><li><strong>RAM:</strong> membantu menyediakan data/instruksi sementara saat komputer bekerja.</li><li><strong>Penyimpanan:</strong> menyimpan data untuk digunakan kembali.</li></ul>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status7">Pahami contoh alur input–proses–output?</span><div class="footer-left"><button class="btn primary complete-next" data-complete="7">Buka Misi 4 →</button></div></div>
+        </article>
+
+        <!-- BAGIAN 9 -->
+        <article class="step" data-step="8" data-minutes="12">
+          <div class="step-top"><div class="step-meta">Bagian 09 <span class="dot"></span> Misi 4 <span class="dot"></span> 12 menit</div><h2>Kasus: Tugas tidak bisa dicetak</h2><p class="step-intro">Ini misi investigasi utama. Gabungkan pengetahuan tentang komponen, aplikasi, sistem operasi, input–proses–output, serta jaringan.</p></div>
+          <div class="step-body">
+            <div class="mission-banner"><div class="mission-icon">🖨️</div><div><strong>Situasi investigasi</strong><span>Seorang murid menyelesaikan tugas di aplikasi pengolah kata. Dokumennya terlihat normal di layar. Ia menekan tombol cetak, tetapi printer jaringan tidak mengeluarkan kertas.</span></div></div>
+            <h3>Susun laporan investigasi di buku tulis</h3>
+            <div class="question-list"><div class="question">Identifikasi proses input, proses, dan output dalam kegiatan mencetak tugas.</div><div class="question">Sebutkan hardware, software, dan brainware yang terlibat.</div><div class="question">Jelaskan bagaimana aplikasi, sistem operasi, dan printer harus bekerja sama.</div><div class="question">Tuliskan minimal tiga kemungkinan penyebab tugas tidak tercetak.</div><div class="question">Susun tiga langkah pemeriksaan yang masuk akal untuk mencari penyebab masalah.</div><div class="question">Apa dampaknya jika komunikasi antara komputer dan printer jaringan terganggu?</div></div>
+            <div class="callout amber"><strong>Petunjuk penting:</strong> kemungkinan penyebab bisa beragam, misalnya printer mati, koneksi jaringan bermasalah, printer yang dipilih salah, antrean cetak tertahan, atau ada kendala pada perangkat lunak. Jangan menganggap salah satu pasti benar sebelum diperiksa.</div>
+            <div class="notebook-note">✎ Beri judul: <strong>Misi 4 — Tugas Tak Tercetak.</strong> Jawaban harus terurut, logis, dan menunjukkan hubungan antar-komponen.</div>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status8">Sudah menyelesaikan laporan investigasi?</span><div class="footer-left"><button class="btn primary complete-next" data-complete="8">Misi selesai, lanjut →</button></div></div>
+        </article>
+
+        <!-- BAGIAN 10 -->
+        <article class="step" data-step="9" data-minutes="4">
+          <div class="step-top"><div class="step-meta">Bagian 10 <span class="dot"></span> Refleksi <span class="dot"></span> 4 menit</div><h2>Periksa pekerjaanmu sebelum dikumpulkan</h2><p class="step-intro">Gunakan daftar ini untuk memastikan semua misi sudah dikerjakan di buku tulis. Centang hanya jika memang sudah selesai.</p></div>
+          <div class="step-body">
+            <div class="reflect-list" id="selfCheckList">
+              <label class="reflect-item"><input type="checkbox" data-check="0"><span><strong>Misi 1:</strong> menjelaskan unsur dan hubungan komponen komputer.</span></label>
+              <label class="reflect-item"><input type="checkbox" data-check="1"><span><strong>Misi 2:</strong> melengkapi tabel empat bentuk kolaborasi.</span></label>
+              <label class="reflect-item"><input type="checkbox" data-check="2"><span><strong>Misi 3:</strong> menjelaskan sistem operasi, multitasking, CPU, dan RAM.</span></label>
+              <label class="reflect-item"><input type="checkbox" data-check="3"><span><strong>Misi 4:</strong> menganalisis kasus pencetakan dokumen.</span></label>
+              <label class="reflect-item"><input type="checkbox" data-check="4"><span>Semua jawaban ditulis di buku dengan tulisan yang terbaca.</span></label>
+            </div>
+            <h3>Refleksi singkat</h3><p>Tulis jawaban kedua pertanyaan berikut di buku tulis.</p>
+            <div class="question-list"><div class="question">Pengetahuan baru apa yang paling kamu pahami setelah belajar kolaborasi sistem komputer?</div><div class="question">Jika komputer mengalami masalah, mengapa kita perlu memahami hubungan antarkomponennya sebelum memutuskan penyebab kerusakan?</div></div>
+            <div class="callout"><strong>Ingat:</strong> komputer bekerja sebagai suatu sistem. Saat terjadi masalah, periksa hubungan dan fungsi komponen secara bertahap sebelum menyimpulkan penyebabnya.</div>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status9">Centang daftar periksa, lalu lanjutkan.</span><div class="footer-left"><button class="btn primary complete-next" data-complete="9">Pemeriksaan selesai →</button></div></div>
+        </article>
+
+        <!-- BAGIAN 11 -->
+        <article class="step" data-step="10" data-minutes="4">
+          <div class="step-top"><div class="step-meta">Bagian 11 <span class="dot"></span> Pengumpulan <span class="dot"></span> 4 menit</div><h2>Kirim hasil investigasimu</h2><p class="step-intro">Pastikan seluruh misi sudah selesai. Pekerjaan tetap berada di buku tulis; Google Form digunakan untuk mengumpulkan hasil sesuai arahan guru.</p></div>
+          <div class="step-body">
+            <div class="google-box"><div class="google-symbol">📋</div><div><strong>Form Pengumpulan Tugas</strong><p>Bab 4 — Kolaborasi dalam Sistem Komputer</p></div></div>
+            <h3>Sebelum mengirim</h3><ol><li>Periksa kembali semua jawaban pada Misi 1–4.</li><li>Pastikan halaman buku tulis difoto dengan jelas dan seluruh tulisan dapat dibaca.</li><li>Buka Google Form menggunakan tombol di bawah.</li><li>Isi identitas sesuai petunjuk dalam formulir.</li><li>Unggah foto pekerjaan jika tersedia kolom unggah, lalu tekan kirim.</li></ol>
+            <a class="btn primary btn-link" href="https://forms.gle/tGGHC9TmxUNzyLYJ6" target="_blank" rel="noopener noreferrer">Buka Google Form ↗</a>
+            <div class="callout amber"><strong>Catatan:</strong> jika Google Form tidak menyediakan kolom unggah foto, ikuti petunjuk pengumpulan tambahan dari guru. Website ini tidak bisa memastikan pengaturan formulir di akun guru.</div>
+            <div class="notebook-note">🎉 Bagus! Setelah pengumpulan berhasil, kamu telah menyelesaikan pembelajaran mandiri “Kolaborasi dalam Sistem Komputer”.</div>
+            <p class="small-print">Progres bagian disimpan pada browser/perangkat ini. Jika kamu memakai perangkat berbeda atau menghapus data browser, tanda selesai mungkin tidak ikut terbawa.</p>
+          </div>
+          <div class="step-footer"><span class="completion-status" id="status10">Akhiri pembelajaran setelah mengirim tugas.</span><div class="footer-left"><button class="btn" id="restartBtn">Ulangi dari awal ↺</button><button class="btn primary" id="finishBtn">Tandai pembelajaran selesai ✓</button></div></div>
+        </article>
+      </section>
+    </main>
+    <div class="end-note">Materi pembelajaran mandiri · Informatika Kelas X · Bab 4: Sistem Komputer</div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = 'misi4-kolaborasi-sistem-komputer-v1';
+      const TIMER_KEY = 'misi4-kolaborasi-timer-v1';
+      const steps = Array.from(document.querySelectorAll('.step'));
+      const navItems = Array.from(document.querySelectorAll('.nav-item'));
+      const total = steps.length;
+      let current = 0;
+      let completed = new Set();
+      let remaining = 90 * 60;
+      let timerInterval = null;
+      let timerStarted = false;
+      const timerDisplay = document.getElementById('timerDisplay');
+      const progressCount = document.getElementById('progressCount');
+      const progressFill = document.getElementById('progressFill');
+      const toast = document.getElementById('toast');
+      let toastTimeout;
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
+      }
+      function loadProgress() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+          if (Array.isArray(saved.completed)) completed = new Set(saved.completed.filter(n => Number.isInteger(n) && n >= 0 && n < total));
+          if (Number.isInteger(saved.current) && saved.current >= 0 && saved.current < total) current = saved.current;
+          const savedChecks = Array.isArray(saved.checks) ? saved.checks : [];
+          document.querySelectorAll('[data-check]').forEach(box => { box.checked = savedChecks.includes(Number(box.dataset.check)); });
+        } catch (e) { /* Browser without local storage: progress still works for this session. */ }
+      }
+      function saveProgress() {
+        try {
+          const checks = Array.from(document.querySelectorAll('[data-check]:checked')).map(box => Number(box.dataset.check));
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({ completed: Array.from(completed), current, checks }));
+        } catch (e) { /* Continue even when storage is unavailable. */ }
+      }
+      function renderProgress() {
+        progressCount.textContent = completed.size;
+        progressFill.style.width = (completed.size / total * 100) + '%';
+        navItems.forEach((item, index) => {
+          item.classList.toggle('active', index === current);
+          item.classList.toggle('done', completed.has(index));
+          const check = item.querySelector('.nav-check');
+          check.textContent = completed.has(index) ? '✓' : '';
+          item.setAttribute('aria-current', index === current ? 'step' : 'false');
+        });
+        steps.forEach((step, index) => {
+          const label = document.getElementById('status' + index);
+          if (label) {
+            if (completed.has(index)) label.textContent = '✓ Bagian ini sudah ditandai selesai.';
+            else if (index === current) label.textContent = index === 0 ? 'Mulai setelah membaca petunjuk.' : 'Tandai bagian selesai setelah mengerjakannya.';
+            else label.textContent = 'Belum ditandai selesai.';
+          }
+        });
+      }
+      function goTo(index) {
+        if (index < 0 || index >= total) return;
+        current = index;
+        steps.forEach((step, i) => step.classList.toggle('active', i === current));
+        saveProgress();
+        renderProgress();
+        if (window.innerWidth < 851) document.querySelector('.content-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        else window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      function completeAndNext(index) {
+        completed.add(index);
+        saveProgress();
+        renderProgress();
+        if (index < total - 1) {
+          goTo(index + 1);
+          showToast('Bagian ditandai selesai. Lanjut ke tahap berikutnya!');
+        } else {
+          showToast('Semua bagian selesai. Terima kasih sudah belajar!');
+        }
+      }
+      navItems.forEach(item => item.addEventListener('click', () => goTo(Number(item.dataset.go))));
+      document.querySelectorAll('.complete-next').forEach(button => button.addEventListener('click', () => completeAndNext(Number(button.dataset.complete))));
+      document.querySelectorAll('[data-check]').forEach(box => box.addEventListener('change', saveProgress));
+
+      function formatTime(seconds) {
+        const min = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const sec = Math.max(0, seconds % 60).toString().padStart(2, '0');
+        return min + ':' + sec;
+      }
+      function updateTimer() {
+        timerDisplay.textContent = formatTime(remaining);
+        if (remaining <= 0) {
+          clearInterval(timerInterval); timerInterval = null;
+          timerDisplay.textContent = '00:00';
+          showToast('Waktu 90 menit selesai. Periksa hasil pekerjaanmu.');
+          document.title = 'Waktu selesai — Misi 4';
+        }
+      }
+      document.getElementById('timerStart').addEventListener('click', () => {
+        if (timerInterval) return;
+        if (remaining <= 0) remaining = 90 * 60;
+        timerStarted = true;
+        timerInterval = setInterval(() => { if (remaining > 0) remaining--; updateTimer(); }, 1000);
+        showToast('Penghitung waktu dimulai. Semangat!');
+      });
+      document.getElementById('timerPause').addEventListener('click', () => {
+        if (timerInterval) { clearInterval(timerInterval); timerInterval = null; showToast('Penghitung waktu dijeda.'); }
+      });
+      document.getElementById('timerReset').addEventListener('click', () => {
+        clearInterval(timerInterval); timerInterval = null; remaining = 90 * 60; timerStarted = false; updateTimer(); showToast('Waktu diatur ulang menjadi 90 menit.');
+      });
+      document.getElementById('restartBtn').addEventListener('click', () => {
+        if (!confirm('Ulangi pembelajaran dari awal dan hapus tanda selesai pada perangkat ini?')) return;
+        completed = new Set(); current = 0;
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        document.querySelectorAll('[data-check]').forEach(box => box.checked = false);
+        goTo(0); showToast('Pembelajaran diatur ulang.');
+      });
+      document.getElementById('finishBtn').addEventListener('click', () => {
+        completed.add(10); saveProgress(); renderProgress(); showToast('Pembelajaran ditandai selesai pada perangkat ini.');
+      });
+      loadProgress();
+      renderProgress();
+      goTo(current);
+      updateTimer();
+    })();
+  </script>
+</body>
+</html>
